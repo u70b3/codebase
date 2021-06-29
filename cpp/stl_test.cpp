@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include <algorithm>
 #include <vector>
+#include <string>
+#include <sstream>      // std::stringstream
+
 using namespace std;
 
 vector<int> vi{3, -1, 2, -100, -20, -20, -20};
@@ -54,6 +57,31 @@ void test_copy()
     // copy_n
     // copy_if
 }
+
+void test_split()
+{
+    string line = "kid and u70b3 and lbs";
+
+    // Vector of string to save tokens
+    vector<string> tokens;
+
+    // stringstream class check1
+    stringstream check1(line);
+
+    string intermediate;
+
+    // Tokenizing w.r.t. space ' '
+    while (getline(check1, intermediate, ' '))
+    {
+        tokens.push_back(intermediate);
+    }
+
+    // Printing the token vector
+    // for (int i = 0; i < tokens.size(); i++)
+    //     cout << tokens[i] << '\n';
+    assert(tokens[2] == string("u70b3"));
+}
+
 void test_all()
 {
     test_max_element();
@@ -68,3 +96,5 @@ int main()
     test_all();
     cout << "all test cases passed!" << endl;
 };
+
+// g++ stl_test.cpp -std=c++17 -o test && ./test && rm ./test
