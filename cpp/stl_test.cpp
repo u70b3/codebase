@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-#include <sstream>      // std::stringstream
+#include <sstream> // std::stringstream
 
 using namespace std;
 
@@ -51,6 +51,21 @@ void test_count()
     // 小于 0 的有 5 个
     assert(res2 == 5);
 }
+void test_remove()
+{
+    std::string str1 = "kid;and;u70b3;and;lbs";
+    str1.erase(std::remove(str1.begin(), str1.end(), ';'),
+               str1.end());
+    assert(str1 == string("kidandu70b3andlbs"));
+
+    std::string str2 = "kid\n and\u70b3 \t  and\n\nlbs";
+    str2.erase(std::remove_if(str2.begin(),
+                              str2.end(),
+                              [](unsigned char x)
+                              { return std::isspace(x); }),
+               str2.end());
+    assert(str1 == string("kidandu70b3andlbs"));
+}
 void test_copy()
 {
     // copy
@@ -88,7 +103,9 @@ void test_all()
     test_for_each();
     test_find();
     test_count();
+    test_remove();
     test_copy();
+    test_split();
 }
 
 int main()
