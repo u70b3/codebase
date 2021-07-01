@@ -1,4 +1,5 @@
-#include "string.h"
+#include "kid_string.h"
+
 #include <iostream>
 #include <utility>
 #include <vector>
@@ -53,4 +54,4 @@ int main()
     return 0;
 }
 
-// 命令：g++ -O0 -g -Wall -o test string_test.cpp && ./test
+// 命令：g++ -O0 -g -Wall -o test kid_string_test.cpp && ./test && rm./test

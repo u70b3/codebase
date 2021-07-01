@@ -3,6 +3,7 @@
         "algorithm": "cpp",
         "iterator": "cpp",
         "vector": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "cassert": "cpp"
     }
 }
