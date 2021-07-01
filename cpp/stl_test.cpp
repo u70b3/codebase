@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cmath>
 
 #include <iostream>
@@ -5,7 +6,8 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-#include <sstream> // std::stringstream
+#include <sstream>   // std::stringstream
+#include <execution> //std::execution::par
 
 using namespace std;
 
@@ -97,6 +99,19 @@ void test_split()
     assert(tokens[2] == string("u70b3"));
 }
 
+void test_parallel()
+{
+    vector<int> longVector;
+    for (size_t i = 0; i < 1e6; i++)
+    {
+        longVector.push_back(i);
+    }
+    // Find element using parallel execution policy
+    auto result1 = find(execution::par, begin(longVector), end(longVector), 2333);
+    // Sort elements using sequential execution policy
+    sort(execution::seq, begin(longVector), end(longVector));
+}
+
 void test_all()
 {
     test_max_element();
@@ -106,6 +121,7 @@ void test_all()
     test_remove();
     test_copy();
     test_split();
+    test_parallel();
 }
 
 int main()
