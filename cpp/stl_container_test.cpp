@@ -11,9 +11,12 @@
 #include <thread>
 #include <future>     // std::async
 #include <filesystem> //std::filesystem
+#include <chrono>     //std::chrono
+#include <ctime>
 
 using namespace std;
 
+// std::async ，避免使用裸的 std::thread
 void TEST_async()
 {
     auto foo = []()
@@ -28,6 +31,7 @@ void TEST_async()
     assert(res == 1000);
 }
 
+// std::filesystem
 void TEST_filesystem()
 {
     const auto bigFilePath{"bigFileToCopy"};
@@ -43,15 +47,31 @@ void TEST_filesystem()
     }
 }
 
+// c++11 时间库
+void TEST_chrono()
+{
+    using namespace std::chrono_literals;
+    auto now1 = std::chrono::steady_clock::now();
+
+    auto two_hours = 2h;
+    auto five_minutes = 5min;
+    auto duration = two_hours + five_minutes;
+    // 2 * 60 * 60 + 5 * 60
+    auto seconds = chrono::duration_cast<chrono::seconds>(duration);
+    assert(seconds.count() == 7500);
+}
+
 void TEST_all()
 {
     TEST_async();
     TEST_filesystem();
+    TEST_chrono();
 }
 
 int main()
 {
     TEST_all();
+    cout << "all test cases passed!" << endl;
     return 0;
 };
 
