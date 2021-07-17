@@ -11,44 +11,50 @@
 
 using namespace std;
 
-vector<int> vi{3, -1, 2, -100, -20, -20, -20};
-
 // min_element一样
 void TEST_max_element()
 {
-    auto res1 = max_element(vi.begin(), vi.end());
-    auto pos1 = distance(vi.begin(), res1);
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+
+    auto res1 = max_element(v.begin(), v.end());
+    auto pos1 = distance(v.begin(), res1);
     assert(pos1 == 0);
 
-    auto res2 = max_element(vi.begin(), vi.end(), [](int lhs, int rhs)
+    auto res2 = max_element(v.begin(), v.end(), [](int lhs, int rhs)
                             { return (abs(lhs) < abs(rhs)); });
-    auto pos2 = distance(vi.begin(), res2);
+    auto pos2 = distance(v.begin(), res2);
     assert(pos2 == 3);
 }
 
 void TEST_for_each()
 {
-    for_each(vi.begin(), vi.end(), [](int i) {});
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+
+    for_each(v.begin(), v.end(), [](int i) {});
 }
 
 void TEST_find()
 {
-    auto res1 = find(vi.begin(), vi.end(), -20);
-    auto pos1 = distance(vi.begin(), res1);
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+
+    auto res1 = find(v.begin(), v.end(), -20);
+    auto pos1 = distance(v.begin(), res1);
     assert(pos1 == 4);
 
-    auto res2 = find_if(vi.begin(), vi.end(), [](int i)
+    auto res2 = find_if(v.begin(), v.end(), [](int i)
                         { return i < -50; });
-    auto pos2 = distance(vi.begin(), res2);
+    auto pos2 = distance(v.begin(), res2);
     assert(pos2 == 3);
 }
 void TEST_count()
 {
-    auto res1 = count(vi.begin(), vi.end(), -20);
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+
+    auto res1 = count(v.begin(), v.end(), -20);
     // -20 出现 3 次
     assert(res1 == 3);
 
-    auto res2 = count_if(vi.begin(), vi.end(), [](int i)
+    auto res2 = count_if(v.begin(), v.end(), [](int i)
                          { return i < 0; });
     // 小于 0 的有 5 个
     assert(res2 == 5);
@@ -112,6 +118,16 @@ void TEST_parallel()
     sort(execution::seq, begin(longVector), end(longVector));
 }
 
+void TEST_topk()
+{
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+
+    // 3th partation, abs
+    std::nth_element(v.begin(), v.begin() + 3, v.end(), [](int lhs, int rhs)
+                     { return std::abs(lhs) < std::abs(rhs); });
+    assert(v[2] == 3);
+}
+
 void TEST_all()
 {
     TEST_max_element();
@@ -122,6 +138,7 @@ void TEST_all()
     TEST_copy();
     TEST_split();
     TEST_parallel();
+    TEST_topk();
 }
 
 int main()
