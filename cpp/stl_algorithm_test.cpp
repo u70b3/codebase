@@ -128,6 +128,19 @@ void TEST_topk()
     assert(v[2] == 3);
 }
 
+void TEST_permutation()
+{
+    std::string str = "acdbe";
+    sort(str.begin(), str.end());
+    vector<string> res;
+    do
+    {
+        res.push_back(str);
+    } while (next_permutation(str.begin(), str.end()));
+    assert(res[1] == string("abced"));
+    assert(res.back() == string("edcba"));
+}
+
 void TEST_all()
 {
     TEST_max_element();
@@ -139,6 +152,7 @@ void TEST_all()
     TEST_split();
     TEST_parallel();
     TEST_topk();
+    TEST_permutation();
 }
 
 int main()
