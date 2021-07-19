@@ -1,3 +1,5 @@
+package main
+
 // file reader
 /*
 
@@ -13,8 +15,6 @@ if err != nil {
 fmt.Println(string(fd))
 
 */
-
-
 
 // file writer
 /*
@@ -63,3 +63,5 @@ go func() {
     }
 }()
 */
+
+func main() {}

@@ -128,6 +128,15 @@ void TEST_topk()
     assert(v[2] == 3);
 }
 
+void TEST_partition()
+{
+    vector<int> v{3, -1, 2, -100, -20, -20, -20};
+    auto res = std::partition(v.begin(), v.end(), [](int i)
+                              { return i % 2 != 0; });
+    auto pos = distance(v.begin(), res);
+    assert(pos == 2);
+}
+
 void TEST_permutation()
 {
     std::string str = "acdbe";
@@ -152,6 +161,7 @@ void TEST_all()
     TEST_split();
     TEST_parallel();
     TEST_topk();
+    TEST_partition();
     TEST_permutation();
 }
 
